@@ -185,8 +185,8 @@
       "title": "Fintech Terminal — Bloomberg-Style Trading Terminal",
       "tag": "Software / Personal Project",
       "problem": "Build a professional-grade, Bloomberg-style financial terminal — a dense research-desk UI spanning Markets, Dashboard, and Crypto trading screens — as a self-driven personal project. [To be added: the original motivation — see case-study questions.]",
-      "role": "Sole developer, end-to-end: UI design, live-updating market data panels, and the paper-trading engine — built with AI-assisted development using Claude Code.",
-      "tech": ["AI-Assisted Development (Claude Code)", "[To be added: framework & data sources]"],
+      "role": "Sole developer, end-to-end: UI design, live-updating market data panels, and the paper-trading engine.",
+      "tech": ["[To be added: framework & data sources]"],
       "challenges": "[To be added: the hardest parts of the build — e.g. keeping many live-updating panels in sync, rendering the candlestick chart and order book — see case-study questions.]",
       "result": "A working terminal with live-updating market tables (indices, forex, commodities, bonds, crypto), Fear & Greed sentiment, market breadth, top gainers/losers, an economic calendar, real-time exchange hours, a candlestick chart with live order book, and a paper-trading system with a mock $100k starting balance. Private project — demo available on request."
     }
@@ -202,7 +202,7 @@
         "Economic calendar and real-time exchange hours",
         "Candlestick trading chart with live order book",
         "Paper-trading order entry system with a mock $100k starting balance and order execution",
-        "Built end-to-end using AI-assisted development (Claude Code)"
+        "Designed and built end-to-end as a solo personal project"
       ],
       "link": "",
       "linkLabel": "",
@@ -212,7 +212,7 @@
     {
       "title": "Personal Portfolio Website",
       "status": "Live",
-      "description": "This very site — designed and built using AI-assisted development (Claude Code), including resume content integration and automated resume editing via the Canva API. Deployed live on GitHub Pages.",
+      "description": "This very site — designed and built from scratch, including resume content integration and automated resume editing via the Canva API. Deployed live on GitHub Pages.",
       "points": [
         "Responsive static site with plain HTML/CSS/JS — no build process",
         "Content driven by a separate content.json for easy edits",

@@ -313,7 +313,7 @@ async function main() {
 
   // --- Footer ---
   document.getElementById("footer-line").innerHTML =
-    `© ${new Date().getFullYear()} ${esc(p.name)} — built with AI-assisted development (Claude Code), deployed on GitHub Pages.`;
+    `© ${new Date().getFullYear()} ${esc(p.name)} — deployed on GitHub Pages.`;
 }
 
 main().catch((err) => {
