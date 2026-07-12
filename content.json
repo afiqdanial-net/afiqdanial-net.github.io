@@ -81,8 +81,7 @@
         "Set up and maintained a dedicated server for vendor use, handling configuration and ongoing administration",
         "Administered virtualized infrastructure using VMware vSphere and ESXi, and integrated HPE Alletra 6000 storage into VMware vCenter 7, diagnosing datastore protection alerts and aligning volume collection policies",
         "Maintained NAS and SAN storage systems, validating snapshot and replication protection policies for data resiliency on production volumes",
-        "Maintained backups for application servers and department shared folders to support business continuity and disaster recovery",
-        "Environment: Cisco Catalyst C1000-24T-4G-L | VMware vSphere/ESXi | VMware vCenter 7.x | HPE Alletra 6000 | HPE SCM Plugin | Layer-3 Campus Network"
+        "Maintained backups for application servers and department shared folders to support business continuity and disaster recovery"
       ]
     },
     {
