@@ -77,7 +77,27 @@ async function main() {
   document.getElementById("cr-company").textContent = cr.company;
   document.getElementById("cr-period").textContent = cr.period;
   document.getElementById("cr-intro").textContent = cr.intro;
-  document.getElementById("cr-environment").textContent = cr.environment;
+
+  const envChips = document.getElementById("cr-env-chips");
+  cr.environment.split("|").map((s) => s.trim()).forEach((tech, i) => {
+    const chip = el("span", "env-chip mono", esc(tech));
+    chip.style.transitionDelay = `${i * 80}ms`;
+    envChips.append(chip);
+  });
+
+  const envPanel = document.getElementById("cr-environment");
+  const envObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          envObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+  envObserver.observe(envPanel);
 
   const crGrid = document.getElementById("cr-areas");
   cr.areas.forEach((a) => {

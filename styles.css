@@ -345,17 +345,76 @@ body {
 .current-role-line .badge { margin-left: 0.4rem; }
 .current-role-intro { color: var(--text-muted); }
 
-.env-line {
+.env-panel {
+  position: relative;
   margin-top: 2rem;
-  padding: 0.9rem 1.2rem;
+  padding: 1.4rem 1.6rem 1.5rem;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: 8px;
-  font-size: 0.82rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.env-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: env-scan 3.5s linear infinite;
+}
+
+@keyframes env-scan {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.env-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
   color: var(--text-muted);
-  overflow-x: auto;
-  white-space: nowrap;
+  margin-bottom: 0.9rem;
+}
+
+.env-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.env-chip {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.8rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.env-panel.in-view .env-chip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.env-chip:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 14px var(--accent-soft), inset 0 0 8px var(--accent-soft);
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .env-panel::before { animation: none; }
+  .env-chip { opacity: 1; transform: none; transition: none; }
 }
 
 /* ---------- Timeline ---------- */
