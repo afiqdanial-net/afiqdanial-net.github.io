@@ -144,12 +144,13 @@
     {
       "title": "Dedicated Vendor Server Setup",
       "tag": "Server Administration",
-      "description": "Set up and maintain a dedicated server for vendor use within the hospital environment, handling initial configuration and ongoing administration.",
+      "description": "Set up and maintain a dedicated server for vendor use, handling initial configuration and ongoing administration.",
       "points": [
-        "Provisioned and configured the server for vendor requirements",
-        "Handle ongoing administration and maintenance"
+        "Provisioned and configured the server so the vendor can deploy and host their website on it",
+        "Handle ongoing administration and maintenance as the server owner",
+        "Also maintained as a personal lab environment for hands-on testing and skill development"
       ],
-      "tech": ["Windows Server", "Server Administration"]
+      "tech": ["Server Administration", "Web Hosting", "Lab Environment"]
     }
   ],
   "additionalProjects": [
