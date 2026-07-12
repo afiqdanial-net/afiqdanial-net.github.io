@@ -273,8 +273,6 @@ body {
 
 .section-heading.centered { justify-content: center; }
 
-.section-num { color: var(--accent); font-size: 0.85em; }
-
 .subheading {
   font-size: 1.05rem;
   margin-bottom: 1rem;
@@ -452,67 +450,6 @@ body {
 
 .cta-banner-text h2 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin-bottom: 0.35rem; }
 .cta-banner-text p { color: var(--text-muted); font-size: 0.95rem; }
-
-/* ---------- Case studies ---------- */
-
-.case-studies {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 860px;
-}
-
-.case-study {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color 0.15s ease;
-}
-
-.case-study:hover { border-color: var(--accent); }
-
-.case-study summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 1.1rem 1.4rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.9rem;
-  transition: background 0.15s ease;
-}
-
-.case-study summary::-webkit-details-marker { display: none; }
-.case-study summary:hover { background: var(--surface-hover); }
-
-.case-study summary .cs-title { font-weight: 700; font-size: 1.02rem; }
-
-.case-study summary .chevron {
-  color: var(--text-muted);
-  transition: transform 0.2s ease;
-  font-size: 0.75rem;
-}
-
-.case-study[open] summary .chevron { transform: rotate(90deg); }
-
-.cs-body {
-  padding: 0.25rem 1.5rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
-
-.cs-block h4 {
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.35rem;
-}
-
-.cs-block p { color: var(--text-muted); font-size: 0.92rem; }
-.cs-block .badges { margin-top: 0.2rem; }
 
 /* ---------- Private project badge & screenshot gallery ---------- */
 

@@ -171,35 +171,6 @@ async function main() {
     projectsGrid.append(card);
   });
 
-  // --- Case studies ---
-  const csList = document.getElementById("case-studies-list");
-  (data.caseStudies || []).forEach((cs) => {
-    const details = el("details", "case-study");
-    const summary = el(
-      "summary",
-      "",
-      `<span class="chevron">▶</span>
-       <span class="cs-title">${esc(cs.title)}</span>
-       <span class="badge badge-outline">${esc(cs.tag)}</span>`
-    );
-    const body = el("div", "cs-body");
-    body.append(
-      el("div", "cs-block", `<h4 class="mono">Problem</h4><p>${esc(cs.problem)}</p>`),
-      el("div", "cs-block", `<h4 class="mono">My Role</h4><p>${esc(cs.role)}</p>`)
-    );
-    const techBlock = el("div", "cs-block", '<h4 class="mono">Tech Stack</h4>');
-    const techBadges = el("div", "badges");
-    cs.tech.forEach((t) => techBadges.append(el("span", "badge", esc(t))));
-    techBlock.append(techBadges);
-    body.append(
-      techBlock,
-      el("div", "cs-block", `<h4 class="mono">Challenges</h4><p>${esc(cs.challenges)}</p>`),
-      el("div", "cs-block", `<h4 class="mono">Result</h4><p>${esc(cs.result)}</p>`)
-    );
-    details.append(summary, body);
-    csList.append(details);
-  });
-
   // --- Additional projects ---
   const addGrid = document.getElementById("additional-grid");
   data.additionalProjects.forEach((proj) => {
