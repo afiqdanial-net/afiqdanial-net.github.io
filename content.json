@@ -1,0 +1,206 @@
+{
+  "meta": {
+    "siteTitle": "Muhammad Afiq Danial — Network & Server Engineer",
+    "description": "Portfolio of Muhammad Afiq Danial Bin Ahmad, Network & Server Engineer based in Batu Caves, Selangor, Malaysia."
+  },
+  "profile": {
+    "name": "Muhammad Afiq Danial Bin Ahmad",
+    "shortName": "Afiq Danial",
+    "initials": "AD",
+    "title": "Network & Server Engineer",
+    "location": "Batu Caves, Selangor, Malaysia",
+    "phone": "+60 17-848 9924",
+    "email": "afiq.ahmaddd@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/afiq-danialll",
+    "github": "",
+    "photo": "",
+    "summary": "Experienced in technical support with a strong foundation in IT troubleshooting and computer systems. Skilled in diagnosing hardware and software issues, providing user support, and maintaining system functionality in a fast-paced environment. Proactive approach to learning and adapting in real-world IT settings, with a commitment to continuous skill development and professional growth."
+  },
+  "currentRole": {
+    "heading": "What I Do Day-to-Day",
+    "company": "Aexis Technologies Sdn Bhd",
+    "period": "Nov 2025 – Present",
+    "intro": "I keep a live hospital network and its server infrastructure running — where downtime directly affects clinical operations.",
+    "areas": [
+      {
+        "title": "Campus Network Operations",
+        "icon": "network",
+        "text": "Configure and maintain switches and wireless access points across the hospital network, including core switch management on a Layer-3 campus network."
+      },
+      {
+        "title": "Network Security Hardening",
+        "icon": "shield",
+        "text": "Enforce Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks — verified for zero-downtime production readiness."
+      },
+      {
+        "title": "Server & Virtualization Administration",
+        "icon": "server",
+        "text": "Manage servers supporting the Hospital Information System (HIS) and administer virtualized infrastructure on VMware vSphere, ESXi, and vCenter 7."
+      },
+      {
+        "title": "Storage, Backup & DR",
+        "icon": "storage",
+        "text": "Maintain NAS/SAN storage with snapshot and replication protection policies, plus backups for application servers and department shared folders for business continuity and disaster recovery."
+      }
+    ],
+    "environment": "Cisco Catalyst C1000-24T-4G-L | VMware vSphere/ESXi | VMware vCenter 7.x | HPE Alletra 6000 | HPE SCM Plugin | Layer-3 Campus Network"
+  },
+  "skills": [
+    {
+      "category": "Infrastructure",
+      "icon": "server",
+      "items": ["VMware ESXi", "vCenter", "Windows Server"]
+    },
+    {
+      "category": "Networking",
+      "icon": "network",
+      "items": ["Cisco", "Sangfor", "VLAN", "Server Policies", "DHCP", "DNS", "Core Switch Management"]
+    },
+    {
+      "category": "Backup & Storage",
+      "icon": "storage",
+      "items": ["Veeam", "Synology NAS", "NAS/SAN Storage"]
+    },
+    {
+      "category": "Scripting",
+      "icon": "code",
+      "items": ["VBScript", "PowerShell", "Python", "Bash"]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Network & Server Engineer",
+      "company": "Aexis Technologies Sdn Bhd",
+      "period": "Nov 2025 – Present",
+      "current": true,
+      "bullets": [
+        "Configured and maintained switches and wireless access points (APs) across the hospital network, including core switch management",
+        "Deployed Cisco Catalyst 1000 Layer-3 switch with multi-VLAN segmentation (Admin, User, Management); implemented DHCP relay, inter-VLAN routing, and static default routing",
+        "Enforced network security controls — Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks; verified switch performance for zero-downtime production readiness",
+        "Managed and maintained servers supporting the Hospital Information System (HIS) to ensure continuous clinical operations",
+        "Set up and maintained a dedicated server for vendor use, handling configuration and ongoing administration",
+        "Administered virtualized infrastructure using VMware vSphere and ESXi, and integrated HPE Alletra 6000 storage into VMware vCenter 7, diagnosing datastore protection alerts and aligning volume collection policies",
+        "Maintained NAS and SAN storage systems, validating snapshot and replication protection policies for data resiliency on production volumes",
+        "Maintained backups for application servers and department shared folders to support business continuity and disaster recovery",
+        "Environment: Cisco Catalyst C1000-24T-4G-L | VMware vSphere/ESXi | VMware vCenter 7.x | HPE Alletra 6000 | HPE SCM Plugin | Layer-3 Campus Network"
+      ]
+    },
+    {
+      "role": "Technical Support Engineer",
+      "company": "Aexis Technologies Sdn Bhd",
+      "period": "May 2025 – Nov 2025",
+      "current": false,
+      "bullets": [
+        "Provided Level 1 technical assistance to medical staff, administrative personnel, and other hospital departments",
+        "Troubleshot and resolved issues related to computer hardware/software, hospital systems, printers, and network connectivity",
+        "Supported users accessing Hospital Information System (HIS), PACS, LIS, and other healthcare-specific software",
+        "Installed, configured, and maintained desktops, laptops, printers, monitors, and medical-related IT devices",
+        "Diagnosed and repaired hardware failures; managed IT asset inventory",
+        "Installed, configured, and updated operating systems and hospital applications",
+        "Assisted with basic network troubleshooting",
+        "Supported domain account management: password resets, profile issues, Active Directory object handling",
+        "Maintained detailed logs of technical issues, resolutions, and changes"
+      ]
+    },
+    {
+      "role": "Customer Support Engineer",
+      "company": "Aexis Technologies Sdn Bhd",
+      "period": "Aug 2024 – Apr 2025",
+      "current": false,
+      "bullets": [
+        "Provided first-level technical and application support via phone and remote sessions for HIS and non-HIS systems",
+        "Handled helpdesk operations including call logging, ticketing, and issue escalation",
+        "Offered after-hours technical support to maintain hospital IT operations and business continuity",
+        "Monitored Server Room operations and ICT alerts after office hours to ensure system uptime and reliability",
+        "Interacted professionally with customers and management to ensure high customer satisfaction",
+        "Supported daily hospital IT operations across devices, systems, and networks",
+        "Escalated critical issues promptly to relevant technical, application, and project management teams"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Cisco Catalyst 1000 Layer-3 Switch Deployment",
+      "tag": "Networking",
+      "description": "Deployed a Cisco Catalyst 1000 Layer-3 switch in a live hospital network with multi-VLAN segmentation for Admin, User, and Management traffic.",
+      "points": [
+        "Implemented DHCP relay, inter-VLAN routing, and static default routing",
+        "Hardened the edge with Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks",
+        "Verified switch performance for zero-downtime production readiness"
+      ],
+      "tech": ["Cisco Catalyst C1000-24T-4G-L", "VLAN", "DHCP Relay", "Inter-VLAN Routing"]
+    },
+    {
+      "title": "HPE Alletra 6000 × VMware vCenter 7 Integration",
+      "tag": "Storage & Virtualization",
+      "description": "Integrated HPE Alletra 6000 storage into VMware vCenter 7 for the hospital's virtualized infrastructure.",
+      "points": [
+        "Diagnosed datastore protection alerts and aligned volume collection policies",
+        "Validated snapshot and replication protection policies for data resiliency on production volumes",
+        "Administered the surrounding vSphere/ESXi environment supporting clinical systems"
+      ],
+      "tech": ["HPE Alletra 6000", "VMware vCenter 7.x", "vSphere/ESXi", "HPE SCM Plugin"]
+    },
+    {
+      "title": "Dedicated Vendor Server Setup",
+      "tag": "Server Administration",
+      "description": "Set up and maintain a dedicated server for vendor use within the hospital environment, handling initial configuration and ongoing administration.",
+      "points": [
+        "Provisioned and configured the server for vendor requirements",
+        "Handle ongoing administration and maintenance"
+      ],
+      "tech": ["Windows Server", "Server Administration"]
+    }
+  ],
+  "additionalProjects": [
+    {
+      "title": "Fintech Terminal",
+      "status": "Private / In Development",
+      "description": "A Bloomberg-style financial terminal application with a dense, professional research-desk UI — pure black background, monospace font, orange accent — across Markets, Dashboard, and Crypto trading screens.",
+      "points": [
+        "Live-updating market data tables: stock indices, forex, commodities, bonds, and crypto",
+        "Fear & Greed sentiment index, market breadth, and top gainers/losers panels",
+        "Economic calendar and real-time exchange hours",
+        "Candlestick trading chart with live order book",
+        "Paper-trading order entry system with mock balance and order execution",
+        "Built end-to-end using AI-assisted development (Claude Code)"
+      ],
+      "link": "",
+      "linkLabel": ""
+    },
+    {
+      "title": "Personal Portfolio Website",
+      "status": "Live",
+      "description": "This very site — designed and built using AI-assisted development (Claude Code), including resume content integration and automated resume editing via the Canva API. Deployed live on GitHub Pages.",
+      "points": [
+        "Responsive static site with plain HTML/CSS/JS — no build process",
+        "Content driven by a separate content.json for easy edits",
+        "Dark/light mode toggle with a dark technical aesthetic",
+        "Deployed on GitHub Pages with automatic redeploy on every push"
+      ],
+      "link": "",
+      "linkLabel": "View Repository"
+    }
+  ],
+  "education": [
+    {
+      "institution": "UniKL Malaysian Institute of Information Technology",
+      "detail": "Diploma in Information Technology — CGPA 3.57",
+      "period": "Aug 2021 – Jul 2024"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Apprentice under K-Youth Development Programme",
+      "detail": "Machining, Automation and Robotic track (course: Productivity, AI and IoT) — Certificate of Completion from T-Robot & MTDC Academy",
+      "period": "Sept 2024"
+    }
+  ],
+  "languages": [
+    { "name": "Bahasa Melayu", "level": "Native" },
+    { "name": "English", "level": "Excellent" }
+  ],
+  "resume": {
+    "file": "resume.pdf"
+  }
+}
