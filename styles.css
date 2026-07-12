@@ -95,6 +95,20 @@ body {
 
 .nav-links a:hover { color: var(--accent); }
 
+.nav-links a.nav-cta {
+  padding: 0.35rem 0.95rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-weight: 600;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-links a.nav-cta:hover {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
 .theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -416,6 +430,128 @@ body {
   .env-panel::before { animation: none; }
   .env-chip { opacity: 1; transform: none; transition: none; }
 }
+
+/* ---------- Mid-page CTA banner ---------- */
+
+.cta-banner {
+  padding: 3rem 0;
+  background:
+    radial-gradient(ellipse 70% 100% at 50% 0%, var(--accent-soft), transparent 75%),
+    var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cta-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.cta-banner-text h2 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin-bottom: 0.35rem; }
+.cta-banner-text p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* ---------- Case studies ---------- */
+
+.case-studies {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 860px;
+}
+
+.case-study {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.case-study:hover { border-color: var(--accent); }
+
+.case-study summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  transition: background 0.15s ease;
+}
+
+.case-study summary::-webkit-details-marker { display: none; }
+.case-study summary:hover { background: var(--surface-hover); }
+
+.case-study summary .cs-title { font-weight: 700; font-size: 1.02rem; }
+
+.case-study summary .chevron {
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+  font-size: 0.75rem;
+}
+
+.case-study[open] summary .chevron { transform: rotate(90deg); }
+
+.cs-body {
+  padding: 0.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.cs-block h4 {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.cs-block p { color: var(--text-muted); font-size: 0.92rem; }
+.cs-block .badges { margin-top: 0.2rem; }
+
+/* ---------- Private project badge & screenshot gallery ---------- */
+
+.badge-private {
+  display: inline-block;
+  margin-top: 1rem;
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.screenshot-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.screenshot-gallery figure {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.screenshot-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---------- Testimonials ---------- */
+
+.testimonial-card { text-align: left; }
+
+.testimonial-quote {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.testimonial-name { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+.testimonial-title { color: var(--text-muted); font-size: 0.85rem; }
 
 /* ---------- Timeline ---------- */
 

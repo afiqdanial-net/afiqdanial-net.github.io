@@ -64,6 +64,13 @@ async function main() {
   document.getElementById("hero-title").textContent = p.title;
   document.getElementById("hero-summary").textContent = p.summary;
 
+  const heroGithub = document.getElementById("hero-github-btn");
+  if (p.github) {
+    heroGithub.href = p.github;
+  } else {
+    heroGithub.hidden = true;
+  }
+
   const avatar = document.getElementById("avatar");
   if (p.photo) {
     avatar.innerHTML = `<img src="${esc(p.photo)}" alt="Photo of ${esc(p.shortName)}">`;
@@ -164,6 +171,35 @@ async function main() {
     projectsGrid.append(card);
   });
 
+  // --- Case studies ---
+  const csList = document.getElementById("case-studies-list");
+  (data.caseStudies || []).forEach((cs) => {
+    const details = el("details", "case-study");
+    const summary = el(
+      "summary",
+      "",
+      `<span class="chevron">▶</span>
+       <span class="cs-title">${esc(cs.title)}</span>
+       <span class="badge badge-outline">${esc(cs.tag)}</span>`
+    );
+    const body = el("div", "cs-body");
+    body.append(
+      el("div", "cs-block", `<h4 class="mono">Problem</h4><p>${esc(cs.problem)}</p>`),
+      el("div", "cs-block", `<h4 class="mono">My Role</h4><p>${esc(cs.role)}</p>`)
+    );
+    const techBlock = el("div", "cs-block", '<h4 class="mono">Tech Stack</h4>');
+    const techBadges = el("div", "badges");
+    cs.tech.forEach((t) => techBadges.append(el("span", "badge", esc(t))));
+    techBlock.append(techBadges);
+    body.append(
+      techBlock,
+      el("div", "cs-block", `<h4 class="mono">Challenges</h4><p>${esc(cs.challenges)}</p>`),
+      el("div", "cs-block", `<h4 class="mono">Result</h4><p>${esc(cs.result)}</p>`)
+    );
+    details.append(summary, body);
+    csList.append(details);
+  });
+
   // --- Additional projects ---
   const addGrid = document.getElementById("additional-grid");
   data.additionalProjects.forEach((proj) => {
@@ -176,6 +212,17 @@ async function main() {
     const ul = el("ul");
     proj.points.forEach((pt) => ul.append(el("li", "", esc(pt))));
     card.append(ul);
+    if (proj.privateNote) {
+      card.append(el("span", "badge badge-private", `🔒 ${esc(proj.privateNote)}`));
+    }
+    if (proj.screenshots && proj.screenshots.length) {
+      // Screenshot gallery — add image paths to "screenshots" in content.json to populate.
+      const gallery = el("div", "screenshot-gallery");
+      proj.screenshots.forEach((src) => {
+        gallery.append(el("figure", "", `<img src="${esc(src)}" alt="Screenshot of ${esc(proj.title)}" loading="lazy">`));
+      });
+      card.append(gallery);
+    }
     if (proj.link) {
       const a = el("a", "btn btn-ghost", esc(proj.linkLabel || "View Project"));
       a.href = proj.link;
@@ -186,6 +233,26 @@ async function main() {
     }
     addGrid.append(card);
   });
+
+  // --- Testimonials (hidden until enabled in content.json) ---
+  const t = data.testimonials;
+  if (t && t.enabled && Array.isArray(t.items) && t.items.length) {
+    const section = document.getElementById("testimonials");
+    section.hidden = false;
+    if (t.heading) document.getElementById("testimonials-heading").textContent = t.heading;
+    const grid = document.getElementById("testimonials-grid");
+    t.items.forEach((item) => {
+      grid.append(
+        el(
+          "div",
+          "card testimonial-card",
+          `<p class="testimonial-quote">“${esc(item.quote)}”</p>
+           <p class="testimonial-name">${esc(item.name)}</p>
+           <p class="testimonial-title">${esc(item.title)}</p>`
+        )
+      );
+    });
+  }
 
   // --- Education & certifications ---
   const eduList = document.getElementById("education-list");

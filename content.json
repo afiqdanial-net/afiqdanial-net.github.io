@@ -3,6 +3,16 @@
     "siteTitle": "Muhammad Afiq Danial — Network & Server Engineer",
     "description": "Portfolio of Muhammad Afiq Danial Bin Ahmad, Network & Server Engineer based in Batu Caves, Selangor, Malaysia."
   },
+  "_metricsTodo": [
+    "Number of endpoints/devices supported on the hospital campus network",
+    "Number of switches and wireless APs configured/managed",
+    "Number of physical servers / VMs / ESXi hosts administered",
+    "HPE Alletra 6000 storage capacity and number of production volumes/datastores protected",
+    "Backup data volume and number of application servers / shared folders backed up",
+    "Ticket volume handled per week/month in support roles (Cutting Edge + Aexis)",
+    "Number of hospital users/departments supported",
+    "Number of instruments/markets tracked in Fintech Terminal"
+  ],
   "profile": {
     "name": "Muhammad Afiq Danial Bin Ahmad",
     "shortName": "Afiq Danial",
@@ -20,12 +30,12 @@
     "heading": "What I Do Day-to-Day",
     "company": "Cutting Edge Technology",
     "period": "Nov 2025 – Present",
-    "intro": "I keep a live hospital network and its server infrastructure running — where downtime directly affects clinical operations.",
+    "intro": "I keep a live hospital campus network and its server infrastructure running — where downtime directly affects clinical operations.",
     "areas": [
       {
         "title": "Campus Network Operations",
         "icon": "network",
-        "text": "Configure and maintain switches and wireless access points across the hospital network, including core switch management on a Layer-3 campus network."
+        "text": "Configure and maintain switches and wireless access points across the hospital campus network, including core switch management on a Layer-3 campus network."
       },
       {
         "title": "Network Security Hardening",
@@ -74,8 +84,8 @@
       "period": "Nov 2025 – Present",
       "current": true,
       "bullets": [
-        "Configured and maintained switches and wireless access points (APs) across the hospital network, including core switch management",
-        "Deployed Cisco Catalyst 1000 Layer-3 switch with multi-VLAN segmentation (Admin, User, Management); implemented DHCP relay, inter-VLAN routing, and static default routing",
+        "Configured and maintained switches and wireless access points (APs) across the hospital campus network, including core switch management",
+        "Deployed Cisco Catalyst 1000 Layer-3 switch with multi-VLAN segmentation (Admin, User, Management) across the hospital campus network; implemented DHCP relay, inter-VLAN routing, and static default routing — completed as a zero-downtime production deployment",
         "Enforced network security controls — Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks; verified switch performance for zero-downtime production readiness",
         "Managed and maintained servers supporting the Hospital Information System (HIS) to ensure continuous clinical operations",
         "Set up and maintained a dedicated server for vendor use, handling configuration and ongoing administration",
@@ -109,7 +119,7 @@
       "bullets": [
         "Provided first-level technical and application support via phone and remote sessions for HIS and non-HIS systems",
         "Handled helpdesk operations including call logging, ticketing, and issue escalation",
-        "Offered after-hours technical support to maintain hospital IT operations and business continuity",
+        "Offered after-hours technical support to keep hospital IT operations running around the clock and maintain business continuity",
         "Monitored Server Room operations and ICT alerts after office hours to ensure system uptime and reliability",
         "Interacted professionally with customers and management to ensure high customer satisfaction",
         "Supported daily hospital IT operations across devices, systems, and networks",
@@ -121,7 +131,7 @@
     {
       "title": "Cisco Catalyst 1000 Layer-3 Switch Deployment",
       "tag": "Networking",
-      "description": "Deployed a Cisco Catalyst 1000 Layer-3 switch in a live hospital network with multi-VLAN segmentation for Admin, User, and Management traffic.",
+      "description": "Deployed a Cisco Catalyst 1000 Layer-3 switch in a live hospital campus network with multi-VLAN segmentation for Admin, User, and Management traffic — a zero-downtime production deployment.",
       "points": [
         "Implemented DHCP relay, inter-VLAN routing, and static default routing",
         "Hardened the edge with Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks",
@@ -132,7 +142,7 @@
     {
       "title": "HPE Alletra 6000 × VMware vCenter 7 Integration",
       "tag": "Storage & Virtualization",
-      "description": "Integrated HPE Alletra 6000 storage into VMware vCenter 7 for the hospital's virtualized infrastructure.",
+      "description": "Integrated HPE Alletra 6000 storage into VMware vCenter 7 for the hospital's virtualized infrastructure supporting clinical systems.",
       "points": [
         "Diagnosed datastore protection alerts and aligned volume collection policies",
         "Validated snapshot and replication protection policies for data resiliency on production volumes",
@@ -152,6 +162,35 @@
       "tech": ["Server Administration", "Web Hosting", "Lab Environment"]
     }
   ],
+  "caseStudies": [
+    {
+      "title": "Cisco Catalyst Layer-3 Switch — Hospital Network Segmentation",
+      "tag": "Networking",
+      "problem": "The hospital campus network needed Admin, User, and Management traffic separated onto dedicated VLANs — on a switch entering production in a live hospital environment where downtime directly affects clinical operations.",
+      "role": "End-to-end deployment: I configured the Cisco Catalyst 1000 Layer-3 switch with multi-VLAN segmentation, DHCP relay, inter-VLAN routing, and static default routing, then hardened the edge with port-level security controls before cutover.",
+      "tech": ["Cisco Catalyst C1000-24T-4G-L", "VLAN Segmentation", "DHCP Relay", "Inter-VLAN Routing", "Static Default Routing", "Port Security (MAC sticky)", "BPDU Guard", "PortFast Edge", "DHCP Snooping"],
+      "challenges": "Deploying into a live hospital network left no room for outages — every change had to be verified for production readiness before cutover. [To be added: the specific issues hit during deployment and how they were resolved — see case-study questions.]",
+      "result": "Zero-downtime production deployment. The switch now runs segmented Admin, User, and Management VLANs in production with port security, BPDU Guard, PortFast Edge, and DHCP Snooping enforced. [To be added: real metrics — e.g. endpoints served, incidents since cutover.]"
+    },
+    {
+      "title": "HPE Alletra 6000 × VMware vCenter 7 — Storage Integration",
+      "tag": "Storage & Virtualization",
+      "problem": "The hospital's virtualized infrastructure needed HPE Alletra 6000 storage integrated into VMware vCenter 7 — and production datastores were raising protection alerts pointing to misaligned volume collection policies.",
+      "role": "I owned the integration and troubleshooting: connected the Alletra 6000 to vCenter 7 via the HPE Storage Connection Manager (SCM) plugin, diagnosed the datastore protection alerts, and aligned volume collection policies across production volumes.",
+      "tech": ["HPE Alletra 6000", "VMware vCenter 7.x", "vSphere/ESXi", "HPE SCM Plugin", "Snapshot & Replication Policies"],
+      "challenges": "Troubleshooting protection alerts on production volumes backing clinical systems, where a wrong policy change could weaken data protection for the Hospital Information System. [To be added: the specific root cause and how it was diagnosed — see case-study questions.]",
+      "result": "Snapshot and replication protection policies validated on production volumes — data resiliency confirmed for the virtualized infrastructure supporting clinical systems. [To be added: real metrics — e.g. number of volumes/datastores protected, storage capacity.]"
+    },
+    {
+      "title": "Fintech Terminal — Bloomberg-Style Trading Terminal",
+      "tag": "Software / Personal Project",
+      "problem": "Build a professional-grade, Bloomberg-style financial terminal — a dense research-desk UI spanning Markets, Dashboard, and Crypto trading screens — as a self-driven personal project. [To be added: the original motivation — see case-study questions.]",
+      "role": "Sole developer, end-to-end: UI design, live-updating market data panels, and the paper-trading engine — built with AI-assisted development using Claude Code.",
+      "tech": ["AI-Assisted Development (Claude Code)", "[To be added: framework & data sources]"],
+      "challenges": "[To be added: the hardest parts of the build — e.g. keeping many live-updating panels in sync, rendering the candlestick chart and order book — see case-study questions.]",
+      "result": "A working terminal with live-updating market tables (indices, forex, commodities, bonds, crypto), Fear & Greed sentiment, market breadth, top gainers/losers, an economic calendar, real-time exchange hours, a candlestick chart with live order book, and a paper-trading system with a mock $100k starting balance. Private project — demo available on request."
+    }
+  ],
   "additionalProjects": [
     {
       "title": "Fintech Terminal",
@@ -162,11 +201,13 @@
         "Fear & Greed sentiment index, market breadth, and top gainers/losers panels",
         "Economic calendar and real-time exchange hours",
         "Candlestick trading chart with live order book",
-        "Paper-trading order entry system with mock balance and order execution",
+        "Paper-trading order entry system with a mock $100k starting balance and order execution",
         "Built end-to-end using AI-assisted development (Claude Code)"
       ],
       "link": "",
-      "linkLabel": ""
+      "linkLabel": "",
+      "privateNote": "Private project — demo available on request",
+      "screenshots": []
     },
     {
       "title": "Personal Portfolio Website",
@@ -179,9 +220,15 @@
         "Deployed on GitHub Pages with automatic redeploy on every push"
       ],
       "link": "https://github.com/afiqdanial-net/afiqdanial-net.github.io",
-      "linkLabel": "View Repository"
+      "linkLabel": "View Source on GitHub"
     }
   ],
+  "testimonials": {
+    "_howToEnable": "Set enabled to true and add real quotes to items — e.g. { \"quote\": \"...\", \"name\": \"Jane Doe\", \"title\": \"IT Manager, Hospital X\" }. The section un-hides automatically. Do not fabricate quotes.",
+    "enabled": false,
+    "heading": "What Colleagues Say",
+    "items": []
+  },
   "education": [
     {
       "institution": "UniKL Malaysian Institute of Information Technology",
