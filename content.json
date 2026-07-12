@@ -40,7 +40,7 @@
       {
         "title": "Network Security Hardening",
         "icon": "shield",
-        "text": "Enforce Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks — verified for zero-downtime production readiness."
+        "text": "Enforce Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks — and maintain Sangfor SSL VPN for secure remote access to hospital PCs, including user provisioning and access rules."
       },
       {
         "title": "Server & Virtualization Administration",
@@ -53,18 +53,18 @@
         "text": "Maintain NAS/SAN storage with snapshot and replication protection policies, plus backups for application servers and department shared folders for business continuity and disaster recovery."
       }
     ],
-    "environment": "Cisco Catalyst C1000-24T-4G-L | VMware vSphere/ESXi | VMware vCenter 7.x | HPE Alletra 6000 | HPE SCM Plugin | Layer-3 Campus Network"
+    "environment": "Cisco Catalyst C1000-24T-4G-L | VMware vSphere/ESXi | VMware vCenter 7.x | HPE Alletra 6000 | HPE SCM Plugin | Sangfor SSL VPN | Proxmox VE | Layer-3 Campus Network"
   },
   "skills": [
     {
       "category": "Infrastructure",
       "icon": "server",
-      "items": ["VMware ESXi", "vCenter", "Windows Server"]
+      "items": ["VMware ESXi", "vCenter", "Windows Server", "Proxmox VE", "Ubuntu Server"]
     },
     {
       "category": "Networking",
       "icon": "network",
-      "items": ["Cisco", "Sangfor", "VLAN", "Server Policies", "DHCP", "DNS", "Core Switch Management"]
+      "items": ["Cisco", "Sangfor SSL VPN", "VLAN", "Server Policies", "DHCP", "DNS", "Core Switch Management"]
     },
     {
       "category": "Backup & Storage",
@@ -84,9 +84,10 @@
       "period": "Nov 2025 – Present",
       "current": true,
       "bullets": [
-        "Configured and maintained switches and wireless access points (APs) across the hospital campus network, including core switch management",
+        "Configured and deployed multiple switches and wireless access points (APs) across the hospital campus network, including core switch management",
         "Deployed Cisco Catalyst 1000 Layer-3 switch with multi-VLAN segmentation (Admin, User, Management) across the hospital campus network; implemented DHCP relay, inter-VLAN routing, and static default routing — completed as a zero-downtime production deployment",
         "Enforced network security controls — Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks; verified switch performance for zero-downtime production readiness",
+        "Set up and maintained Sangfor SSL VPN for secure remote access to hospital PCs from anywhere, including user account provisioning and access rule configuration",
         "Managed and maintained servers supporting the Hospital Information System (HIS) to ensure continuous clinical operations",
         "Set up and maintained a dedicated server for vendor use, handling configuration and ongoing administration",
         "Administered virtualized infrastructure using VMware vSphere and ESXi, and integrated HPE Alletra 6000 storage into VMware vCenter 7, diagnosing datastore protection alerts and aligning volume collection policies",
@@ -149,6 +150,17 @@
         "Administered the surrounding vSphere/ESXi environment supporting clinical systems"
       ],
       "tech": ["HPE Alletra 6000", "VMware vCenter 7.x", "vSphere/ESXi", "HPE SCM Plugin"]
+    },
+    {
+      "title": "CET Internal Application Server (Proxmox Virtualization)",
+      "tag": "Virtualization",
+      "description": "Company-owned server infrastructure hosting the PPM web application and other internal web apps used across the company.",
+      "points": [
+        "Installed and configured Proxmox VE as the virtualization platform on a Dell PowerEdge R510, with Ubuntu Server deployed as the application host",
+        "Configured LUN storage served from a separate Dell PowerEdge R730 storage server, connected to the virtualization host for reliable application data storage",
+        "Handle ongoing administration and maintenance to keep company web applications available"
+      ],
+      "tech": ["Proxmox VE", "Ubuntu Server", "Dell PowerEdge R510/R730", "LUN Storage"]
     },
     {
       "title": "Dedicated Vendor Server Setup",
