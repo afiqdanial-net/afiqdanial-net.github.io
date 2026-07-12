@@ -53,7 +53,7 @@
         "text": "Maintain NAS/SAN storage with snapshot and replication protection policies, plus backups for application servers and department shared folders for business continuity and disaster recovery."
       }
     ],
-    "environment": "Cisco Catalyst C1000-24T-4G-L | VMware vSphere/ESXi | VMware vCenter 7.x | HPE Alletra 6000 | HPE SCM Plugin | Sangfor SSL VPN | Proxmox VE | Layer-3 Campus Network"
+    "environment": "Cisco Catalyst Switches | VMware vSphere/ESXi | VMware vCenter 7.x | HPE Alletra 6000 | HPE SCM Plugin | Sangfor SSL VPN | Proxmox VE | Layer-3 Campus Network"
   },
   "skills": [
     {
@@ -84,8 +84,7 @@
       "period": "Nov 2025 – Present",
       "current": true,
       "bullets": [
-        "Configured and deployed multiple switches and wireless access points (APs) across the hospital campus network, including core switch management",
-        "Deployed Cisco Catalyst 1000 Layer-3 switch with multi-VLAN segmentation (Admin, User, Management) across the hospital campus network; implemented DHCP relay, inter-VLAN routing, and static default routing — completed as a zero-downtime production deployment",
+        "Configured and deployed multiple switches and wireless access points (APs) across the hospital campus network, including core switch management, multi-VLAN segmentation (Admin, User, Management), DHCP relay, inter-VLAN routing, and static routing",
         "Enforced network security controls — Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks; verified switch performance for zero-downtime production readiness",
         "Set up and maintained Sangfor SSL VPN for secure remote access to hospital PCs from anywhere, including user account provisioning and access rule configuration",
         "Managed and maintained servers supporting the Hospital Information System (HIS) to ensure continuous clinical operations",
@@ -130,15 +129,15 @@
   ],
   "projects": [
     {
-      "title": "Cisco Catalyst 1000 Layer-3 Switch Deployment",
+      "title": "Hospital Campus Network — Layer-3 Switch Deployments",
       "tag": "Networking",
-      "description": "Deployed a Cisco Catalyst 1000 Layer-3 switch in a live hospital campus network with multi-VLAN segmentation for Admin, User, and Management traffic — a zero-downtime production deployment.",
+      "description": "Deployed and configured multiple switches across a live hospital campus network with multi-VLAN segmentation for Admin, User, and Management traffic — zero-downtime production deployments.",
       "points": [
-        "Implemented DHCP relay, inter-VLAN routing, and static default routing",
+        "Implemented DHCP relay, inter-VLAN routing, and static routing",
         "Hardened the edge with Port Security (MAC sticky, shutdown), BPDU Guard, PortFast Edge, and DHCP Snooping with trusted trunks",
         "Verified switch performance for zero-downtime production readiness"
       ],
-      "tech": ["Cisco Catalyst C1000-24T-4G-L", "VLAN", "DHCP Relay", "Inter-VLAN Routing"]
+      "tech": ["Cisco Catalyst Switches", "VLAN", "DHCP Relay", "Inter-VLAN Routing"]
     },
     {
       "title": "HPE Alletra 6000 × VMware vCenter 7 Integration",
@@ -176,11 +175,11 @@
   ],
   "caseStudies": [
     {
-      "title": "Cisco Catalyst Layer-3 Switch — Hospital Network Segmentation",
+      "title": "Layer-3 Switch Deployments — Hospital Network Segmentation",
       "tag": "Networking",
-      "problem": "The hospital campus network needed Admin, User, and Management traffic separated onto dedicated VLANs — on a switch entering production in a live hospital environment where downtime directly affects clinical operations.",
-      "role": "End-to-end deployment: I configured the Cisco Catalyst 1000 Layer-3 switch with multi-VLAN segmentation, DHCP relay, inter-VLAN routing, and static default routing, then hardened the edge with port-level security controls before cutover.",
-      "tech": ["Cisco Catalyst C1000-24T-4G-L", "VLAN Segmentation", "DHCP Relay", "Inter-VLAN Routing", "Static Default Routing", "Port Security (MAC sticky)", "BPDU Guard", "PortFast Edge", "DHCP Snooping"],
+      "problem": "The hospital campus network needed Admin, User, and Management traffic separated onto dedicated VLANs — on switches entering production in a live hospital environment where downtime directly affects clinical operations.",
+      "role": "End-to-end deployment: I configured Layer-3 switches with multi-VLAN segmentation, DHCP relay, inter-VLAN routing, and static routing, then hardened the edge with port-level security controls before cutover.",
+      "tech": ["Cisco Catalyst Switches", "VLAN Segmentation", "DHCP Relay", "Inter-VLAN Routing", "Static Routing", "Port Security (MAC sticky)", "BPDU Guard", "PortFast Edge", "DHCP Snooping"],
       "challenges": "Deploying into a live hospital network left no room for outages — every change had to be verified for production readiness before cutover. [To be added: the specific issues hit during deployment and how they were resolved — see case-study questions.]",
       "result": "Zero-downtime production deployment. The switch now runs segmented Admin, User, and Management VLANs in production with port security, BPDU Guard, PortFast Edge, and DHCP Snooping enforced. [To be added: real metrics — e.g. endpoints served, incidents since cutover.]"
     },
