@@ -9,11 +9,46 @@
   }
 })();
 
-document.getElementById("theme-toggle").addEventListener("click", () => {
+// Motion preferences — checked once; every animation below respects these.
+const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const FINE_POINTER = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+document.getElementById("theme-toggle").addEventListener("click", (e) => {
   const root = document.documentElement;
   const next = root.dataset.theme === "dark" ? "light" : "dark";
-  root.dataset.theme = next;
-  localStorage.setItem("theme", next);
+  const apply = () => {
+    root.dataset.theme = next;
+    localStorage.setItem("theme", next);
+  };
+
+  // Circular reveal via the View Transitions API where available;
+  // instant switch otherwise (and for reduced-motion users).
+  if (REDUCED_MOTION || !document.startViewTransition) {
+    apply();
+    return;
+  }
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+  const radius = Math.hypot(
+    Math.max(x, window.innerWidth - x),
+    Math.max(y, window.innerHeight - y)
+  );
+  root.classList.add("theme-switching");
+  const vt = document.startViewTransition(apply);
+  // .catch: a transition aborted mid-flight (e.g. rapid re-click) rejects
+  // these promises; the theme itself has already been applied.
+  vt.ready
+    .then(() => {
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        { duration: 450, easing: "ease-in-out", pseudoElement: "::view-transition-new(root)" }
+      );
+    })
+    .catch(() => {});
+  vt.finished
+    .finally(() => root.classList.remove("theme-switching"))
+    .catch(() => {});
 });
 
 const navToggle = document.getElementById("nav-toggle");
@@ -59,7 +94,7 @@ async function main() {
 
   // --- Hero ---
   document.title = data.meta.siteTitle;
-  document.getElementById("hero-location").textContent = p.location.toUpperCase();
+  document.getElementById("hero-eyebrow-text").textContent = `ONLINE · ${p.location.toUpperCase()}`;
   document.getElementById("hero-name").textContent = p.name;
   document.getElementById("hero-title").textContent = p.title;
   document.getElementById("hero-summary").textContent = p.summary;
@@ -294,6 +329,16 @@ async function main() {
   // --- Footer ---
   document.getElementById("footer-line").innerHTML =
     `© ${new Date().getFullYear()} ${esc(p.name)} — deployed on GitHub Pages.`;
+
+  // --- Animation layer (all rendered nodes exist from here on) ---
+  initReveals();
+  initScrollEffects();
+  initCardTilt();
+  initMagneticButtons();
+  initClock();
+  initCountUps();
+  initHeroNetwork();
+  heroEntrance(p);
 }
 
 main().catch((err) => {
@@ -301,3 +346,352 @@ main().catch((err) => {
   document.getElementById("hero-name").textContent =
     "Could not load content.json — if you opened index.html directly from disk, serve it over HTTP (e.g. python -m http.server).";
 });
+
+/* ==========================================================
+   Animation layer — every effect below respects
+   prefers-reduced-motion and degrades to the static page.
+   ========================================================== */
+
+// --- Hero entrance: terminal typing → name decrypt → staged fade-ups ---
+
+function typeText(node, text, speed = 32) {
+  return new Promise((resolve) => {
+    node.classList.add("typing");
+    let i = 0;
+    (function tick() {
+      node.textContent = text.slice(0, ++i);
+      if (i < text.length) {
+        setTimeout(tick, speed);
+      } else {
+        node.classList.remove("typing");
+        resolve();
+      }
+    })();
+  });
+}
+
+function scrambleText(node, finalText, duration = 850) {
+  const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ<>#/[]{}=+*";
+  const randomize = (from) => {
+    let out = finalText.slice(0, from);
+    for (let i = from; i < finalText.length; i++) {
+      out += finalText[i] === " " ? " " : CHARS[(Math.random() * CHARS.length) | 0];
+    }
+    return out;
+  };
+  node.textContent = randomize(0);
+  return new Promise((resolve) => {
+    let start = null;
+    requestAnimationFrame(function step(now) {
+      if (start === null) start = now;
+      const t = Math.min((now - start) / duration, 1);
+      node.textContent = randomize(Math.floor(t * finalText.length));
+      if (t < 1) requestAnimationFrame(step);
+      else resolve();
+    });
+  });
+}
+
+async function heroEntrance(p) {
+  if (REDUCED_MOTION) return; // static hero already rendered by main()
+  const eyebrow = document.getElementById("hero-eyebrow-text");
+  const name = document.getElementById("hero-name");
+  const fadeEls = [
+    document.getElementById("hero-title"),
+    document.getElementById("hero-summary"),
+    document.querySelector(".hero-actions"),
+    document.querySelector(".hero-photo"),
+  ].filter(Boolean);
+
+  const eyebrowText = eyebrow.textContent;
+  const nameText = name.textContent;
+  eyebrow.textContent = "";
+  fadeEls.forEach((el) => el.classList.add("hero-fade"));
+
+  await typeText(eyebrow, eyebrowText);
+  await scrambleText(name, nameText);
+  fadeEls.forEach((el, i) => {
+    setTimeout(() => el.classList.add("hero-fade-in"), i * 130);
+  });
+}
+
+// --- Scroll-triggered reveals (extends the env-panel pattern site-wide) ---
+
+function initReveals() {
+  if (REDUCED_MOTION) return;
+  const groups = [
+    "#cr-areas > .card",
+    "#skills-grid > .card",
+    "#projects-grid > .card",
+    "#additional-grid > .card",
+    "#education-list > .edu-item",
+    "#cert-list > .edu-item",
+    "#timeline .timeline-item > details",
+  ];
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const target = entry.target;
+        observer.unobserve(target);
+        const item = target.closest(".timeline-item");
+        if (item) item.classList.add("tl-seen"); // dot glow fires first
+        target.classList.add("in-view");
+        // Once revealed, hand the element back to its stock styles so
+        // hover transitions (cards, tilt) behave exactly as before.
+        const cleanup = () => {
+          target.classList.remove("reveal", "in-view");
+          target.style.transitionDelay = "";
+          target.removeEventListener("transitionend", cleanup);
+        };
+        target.addEventListener("transitionend", cleanup);
+        setTimeout(cleanup, 1500);
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  groups.forEach((sel) => {
+    document.querySelectorAll(sel).forEach((el, i) => {
+      el.classList.add("reveal");
+      el.style.transitionDelay = `${Math.min(i, 6) * 80}ms`;
+      observer.observe(el);
+    });
+  });
+}
+
+// --- Scroll progress bar + timeline line draw-in (one rAF-throttled handler) ---
+
+function initScrollEffects() {
+  const progress = document.getElementById("scroll-progress");
+  const timeline = document.getElementById("timeline");
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+    if (timeline && !REDUCED_MOTION) {
+      const rect = timeline.getBoundingClientRect();
+      const drawn = Math.min(Math.max((window.innerHeight * 0.75 - rect.top) / rect.height, 0), 1);
+      timeline.style.setProperty("--tl-draw", drawn.toFixed(4));
+    }
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  onScroll();
+}
+
+// --- Subtle 3D tilt on cards (desktop pointers only) ---
+
+function initCardTilt() {
+  if (REDUCED_MOTION || !FINE_POINTER) return;
+  const MAX_DEG = 3.5;
+  document.querySelectorAll(".card").forEach((card) => {
+    let px = 0, py = 0, raf = null;
+    card.addEventListener("mousemove", (e) => {
+      if (card.classList.contains("reveal")) return; // don't fight the reveal transition
+      const r = card.getBoundingClientRect();
+      px = (e.clientX - r.left) / r.width - 0.5;
+      py = (e.clientY - r.top) / r.height - 0.5;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        card.style.transform =
+          `perspective(700px) rotateX(${(-py * MAX_DEG).toFixed(2)}deg) ` +
+          `rotateY(${(px * MAX_DEG).toFixed(2)}deg) translateY(-3px)`;
+      });
+    });
+    card.addEventListener("mouseleave", () => {
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = null;
+      }
+      card.style.transform = "";
+    });
+  });
+}
+
+// --- Magnetic pull on primary CTAs (desktop pointers only) ---
+
+function initMagneticButtons() {
+  if (REDUCED_MOTION || !FINE_POINTER) return;
+  document.querySelectorAll(".btn-primary, .btn-lg").forEach((btn) => {
+    btn.addEventListener("mousemove", (e) => {
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+      const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+      // -2px keeps the stock .btn:hover lift baked in
+      btn.style.transform = `translate(${(dx * 5).toFixed(1)}px, ${(dy * 4 - 2).toFixed(1)}px)`;
+    });
+    btn.addEventListener("mouseleave", () => {
+      btn.style.transform = "";
+    });
+  });
+}
+
+// --- Live clock (Asia/Kuala_Lumpur), contact section ---
+
+function initClock() {
+  const clock = document.getElementById("contact-clock");
+  if (!clock) return;
+  const fmt = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Kuala_Lumpur",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+  const tick = () => {
+    clock.textContent = `⏱ LOCAL TIME ${fmt.format(new Date())} MYT`;
+  };
+  tick();
+  setInterval(tick, 1000);
+}
+
+// --- Count-up utility (dormant until elements carry data-count-to) ---
+
+function initCountUps() {
+  const els = document.querySelectorAll("[data-count-to]");
+  if (!els.length) return;
+
+  const animate = (node) => {
+    const raw = node.dataset.countTo;
+    const target = parseFloat(raw);
+    if (Number.isNaN(target)) return;
+    const suffix = node.dataset.countSuffix || "";
+    if (REDUCED_MOTION) {
+      node.textContent = raw + suffix;
+      return;
+    }
+    const duration = parseInt(node.dataset.countDuration, 10) || 1200;
+    const decimals = (raw.split(".")[1] || "").length;
+    let start = null;
+    requestAnimationFrame(function step(now) {
+      if (start === null) start = now;
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      node.textContent = (target * eased).toFixed(decimals) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        animate(entry.target);
+      });
+    },
+    // threshold 0: zero-size placeholders (empty spans) never reach a
+    // fractional visibility threshold, so fire on first intersection.
+    { threshold: 0 }
+  );
+  els.forEach((node) => observer.observe(node));
+}
+
+// --- Hero background: drifting network nodes (desktop only, pauses offscreen) ---
+
+function initHeroNetwork() {
+  if (REDUCED_MOTION || !FINE_POINTER || window.innerWidth < 820) return;
+  const hero = document.querySelector(".hero");
+  const canvas = document.createElement("canvas");
+  canvas.className = "hero-net";
+  canvas.setAttribute("aria-hidden", "true");
+  hero.prepend(canvas);
+  const ctx = canvas.getContext("2d");
+
+  let w = 0, h = 0, nodes = [];
+  let running = false, rafId = null, heroVisible = false;
+
+  let accent = "45, 212, 191";
+  const readAccent = () => {
+    const c = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
+    const m = c.match(/^#([0-9a-f]{6})$/i);
+    if (m) {
+      accent = [m[1].slice(0, 2), m[1].slice(2, 4), m[1].slice(4, 6)]
+        .map((x) => parseInt(x, 16))
+        .join(", ");
+    }
+  };
+  readAccent();
+  document.getElementById("theme-toggle").addEventListener("click", () => setTimeout(readAccent, 60));
+
+  const size = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = hero.clientWidth;
+    h = hero.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.min(Math.floor((w * h) / 26000), 60);
+    nodes = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+    }));
+  };
+  size();
+
+  const LINK = 130;
+  const frame = () => {
+    if (!running) return;
+    ctx.clearRect(0, 0, w, h);
+    ctx.lineWidth = 1;
+    for (const n of nodes) {
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    }
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < LINK * LINK) {
+          ctx.strokeStyle = `rgba(${accent}, ${((1 - Math.sqrt(d2) / LINK) * 0.28).toFixed(3)})`;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+      ctx.fillStyle = `rgba(${accent}, 0.5)`;
+      ctx.beginPath();
+      ctx.arc(a.x, a.y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    rafId = requestAnimationFrame(frame);
+  };
+
+  const setRunning = (on) => {
+    if (on === running) return;
+    running = on;
+    if (on) rafId = requestAnimationFrame(frame);
+    else if (rafId) cancelAnimationFrame(rafId);
+  };
+
+  new IntersectionObserver((entries) => {
+    heroVisible = entries[0].isIntersecting;
+    setRunning(heroVisible && !document.hidden);
+  }).observe(hero);
+  document.addEventListener("visibilitychange", () => setRunning(heroVisible && !document.hidden));
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(size, 150);
+  }, { passive: true });
+}

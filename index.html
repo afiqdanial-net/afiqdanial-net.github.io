@@ -10,6 +10,8 @@
 </head>
 <body>
 
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
   <header class="site-header">
     <nav class="nav container">
       <a href="#top" class="nav-brand mono" id="nav-brand">afiq@portfolio:~$</a>
@@ -39,7 +41,7 @@
     <section class="hero" id="about">
       <div class="container hero-grid">
         <div class="hero-text">
-          <p class="hero-eyebrow mono" id="hero-status"><span class="status-dot"></span> ONLINE · <span id="hero-location"></span></p>
+          <p class="hero-eyebrow mono" id="hero-status"><span class="status-dot"></span> <span id="hero-eyebrow-text"></span></p>
           <h1 id="hero-name"></h1>
           <p class="hero-title" id="hero-title"></p>
           <p class="hero-summary" id="hero-summary"></p>
@@ -174,6 +176,7 @@
         <div class="contact-cards" id="contact-links"></div>
         <a href="#" class="btn btn-primary btn-lg" id="contact-mailto">Say Hello 👋</a>
         <p class="contact-location mono" id="contact-location"></p>
+        <p class="contact-clock mono" id="contact-clock"></p>
       </div>
     </section>
 

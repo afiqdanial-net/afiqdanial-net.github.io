@@ -705,6 +705,8 @@ body {
 
   .nav-toggle { display: flex; }
 
+  .nav-links a:not(.nav-cta)::after { transform-origin: left; }
+
   .nav-links {
     display: none;
     position: absolute;
@@ -722,4 +724,150 @@ body {
   .nav-links.open { display: flex; }
 
   .timeline-item summary .period { margin-left: 0; width: 100%; }
+}
+
+/* ==========================================================
+   Animation layer — motion added on top of the static page.
+   Every effect here has a prefers-reduced-motion escape at
+   the bottom of this block, matching the env-panel pattern.
+   ========================================================== */
+
+/* ---------- Scroll progress bar ---------- */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 300;
+  pointer-events: none;
+}
+
+/* ---------- Hero entrance ---------- */
+
+.typing::after {
+  content: "▍";
+  margin-left: 2px;
+  animation: pulse 0.8s steps(2, start) infinite;
+}
+
+.hero-fade {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-fade.hero-fade-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Hero network canvas ---------- */
+
+.hero { position: relative; overflow: hidden; }
+
+.hero-net {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Scroll reveals (site-wide env-chip pattern) ---------- */
+
+.reveal {
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal:not(.in-view) {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* ---------- Timeline draw-in + dot pulse ---------- */
+
+.timeline::before {
+  transform: scaleY(var(--tl-draw, 1));
+  transform-origin: top;
+}
+
+.timeline-item.tl-seen::before {
+  animation: dot-pulse 0.9s ease-out 1;
+}
+
+@keyframes dot-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); }
+  100% { box-shadow: 0 0 0 16px transparent; }
+}
+
+/* ---------- Animated nav underline ---------- */
+
+.nav-links a:not(.nav-cta) {
+  position: relative;
+}
+
+.nav-links a:not(.nav-cta)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-links a:not(.nav-cta):hover::after,
+.nav-links a:not(.nav-cta):focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Theme switch (View Transitions circular reveal) ---------- */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.theme-switching body {
+  transition: none;
+}
+
+/* ---------- Live clock ---------- */
+
+.contact-clock {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Reduced motion: disable/shortcut everything above ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal,
+  .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
+  .hero-fade { opacity: 1; transform: none; transition: none; }
+  .typing::after { animation: none; }
+  .timeline::before { transform: none; }
+  .timeline-item.tl-seen::before { animation: none; }
+  .nav-links a:not(.nav-cta)::after { transition: none; }
 }
