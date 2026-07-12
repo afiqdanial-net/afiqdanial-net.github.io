@@ -292,15 +292,23 @@ async function main() {
 
   // --- Contact ---
   const contacts = [
-    { label: p.email, href: `mailto:${p.email}`, icon: "✉" },
-    { label: p.phone, href: `tel:${p.phone.replace(/[^+\d]/g, "")}`, icon: "☎" },
-    { label: "LinkedIn", href: p.linkedin, icon: "in" },
+    { label: "Email", value: p.email, href: `mailto:${p.email}`, icon: "✉" },
+    { label: "Phone", value: p.phone, href: `tel:${p.phone.replace(/[^+\d]/g, "")}`, icon: "☎" },
+    { label: "LinkedIn", value: p.linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com/, ""), href: p.linkedin, icon: "in" },
   ];
-  if (p.github) contacts.push({ label: "GitHub", href: p.github, icon: "gh" });
+  if (p.github) {
+    contacts.push({ label: "GitHub", value: p.github.replace(/^https?:\/\/(www\.)?github\.com\//, "@"), href: p.github, icon: "gh" });
+  }
 
   const contactLinks = document.getElementById("contact-links");
   contacts.forEach((c) => {
-    const a = el("a", "", `<span class="mono">${esc(c.icon)}</span> ${esc(c.label)}`);
+    const a = el(
+      "a",
+      "contact-card",
+      `<span class="cc-icon mono">${esc(c.icon)}</span>
+       <span class="cc-label">${esc(c.label)}</span>
+       <span class="cc-value">${esc(c.value)}</span>`
+    );
     a.href = c.href;
     if (c.href.startsWith("http")) {
       a.target = "_blank";
@@ -310,6 +318,7 @@ async function main() {
   });
 
   document.getElementById("contact-mailto").href = `mailto:${p.email}?subject=Hello%20${encodeURIComponent(p.shortName)}`;
+  document.getElementById("contact-location").textContent = `📍 ${p.location} (GMT+8)`;
 
   // --- Footer ---
   document.getElementById("footer-line").innerHTML =
