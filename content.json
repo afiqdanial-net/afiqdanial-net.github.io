@@ -204,20 +204,6 @@
   ],
   "additionalProjects": [
     {
-      "title": "Dengar-Kata Quest",
-      "status": "Educational Game / In Development",
-      "description": "A suite of offline 3D listening-and-speaking games for Year 2 Bahasa Melayu pupils, with four 3D worlds (one per question type: Soalan, Suruhan, Permintaan, Pesanan) and ten healthy-eating arcade mini-games.",
-      "points": [
-        "Built the 3D worlds with Three.js/WebGL and a shared visual effects module (bloom, light rays, colour grading, particles) that lowers quality on slower devices",
-        "Calm display mode designed for inclusive and ADHD learners",
-        "Spoken prompts using text-to-speech and the teacher's own voice recordings, plus camera hand-tracking controls with MediaPipe",
-        "Node.js (Express) + SQLite backend recording player names, scores and every answer, with a teacher admin page and Nginx/systemd configs for server deployment",
-        "Each game packaged as a single self-contained HTML file by a custom Node.js build script, so it runs offline on school PCs"
-      ],
-      "link": "",
-      "linkLabel": ""
-    },
-    {
       "title": "Fintech Terminal",
       "status": "Private / In Development",
       "description": "A Bloomberg-style financial terminal application with a dense, professional research-desk UI — pure black background, monospace font, orange accent — across Markets, Dashboard, and Crypto trading screens.",
