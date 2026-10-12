@@ -99,7 +99,9 @@ let bootResolve;
 const bootDone = runBoot();
 
 async function main() {
-  const res = await fetch("content.json");
+  // no-cache: revalidate every load so content.json edits show immediately
+  // (GitHub Pages otherwise lets browsers reuse it for 10 minutes).
+  const res = await fetch("content.json", { cache: "no-cache" });
   const data = await res.json();
   const p = data.profile;
 
